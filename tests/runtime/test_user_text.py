@@ -94,7 +94,7 @@ def test_the_language_is_read_from_the_config_at_call_time(tmp_path, monkeypatch
 def test_the_bot_name_is_read_live_and_never_empty(tmp_path, monkeypatch) -> None:
     path = tmp_path / "config.json"
     monkeypatch.setattr(get_runtime_context(), "config_path", path)
-    assert user_text.current_bot_name() == "Jenny"
+    assert user_text.current_bot_name() == "Liva"
 
     config = Config()
     config.agents.defaults.bot_name = "  Ada "
@@ -103,4 +103,4 @@ def test_the_bot_name_is_read_live_and_never_empty(tmp_path, monkeypatch) -> Non
 
     config.agents.defaults.bot_name = "   "
     save_config(config, path)
-    assert user_text.current_bot_name() == "Jenny"
+    assert user_text.current_bot_name() == "Liva"

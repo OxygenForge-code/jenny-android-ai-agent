@@ -116,7 +116,7 @@ _ANDROID_PACKAGE_RE = re.compile(r"\A[A-Za-z0-9_.]{1,255}\Z")
 # senza policy e se la sarebbe presa addosso tutta insieme il giorno in cui i
 # due file si scambiano il nome — cioe' alla fine, cioe' nel momento in cui una
 # violazione costa di piu' e si spiega di meno.
-_SHELL_DOCUMENTS = frozenset({"index.html", "workshop.html", "onboarding.html"})
+_SHELL_DOCUMENTS = frozenset({"index.html", "liva.html", "workshop.html", "onboarding.html"})
 
 
 def _is_foreign_navigation(headers: Any) -> bool:
@@ -921,7 +921,7 @@ class GatewayHTTPHandler:
         # but files live at templates/ui/assets/...
         if segments[:1] == ["html-mobile"]:
             segments = segments[1:]
-        rel = "/".join(segments) or "index.html"
+        rel = "/".join(segments) or "liva.html"
         # Il percorso grezzo: lo risolve ``is_path_within``, e un loop di symlink
         # (``RuntimeError`` su Python 3.11) e' un 403 invece di un'eccezione.
         candidate = self.static_dist_path / rel
@@ -929,13 +929,13 @@ class GatewayHTTPHandler:
             return _http_error(403, "Forbidden")
         served_rel = rel
         if not candidate.is_file():
-            # SPA fallback: percorsi sconosciuti servono la shell dell'app.
-            # L'index.html canonico basta anche se la copia su disco manca.
-            index = self.static_dist_path / "index.html"
-            if not index.is_file() and self._canonical_ui_bytes("index.html") is None:
+            # SPA fallback: percorsi sconosciuti servono la nuova shell Liva.
+            # Il documento canonico basta anche se la copia su disco manca.
+            index = self.static_dist_path / "liva.html"
+            if not index.is_file() and self._canonical_ui_bytes("liva.html") is None:
                 return None
             candidate = index
-            served_rel = "index.html"
+            served_rel = "liva.html"
         # Contenuto attivo (HTML/JS/CSS del manifest): sempre dai byte canonici
         # del package, mai dalla copia su disco scrivibile. Fallback al disco per
         # font/immagini e per eventuali file fuori manifest.
@@ -997,19 +997,24 @@ class GatewayHTTPHandler:
         # _SHELL_DOCUMENTS); the individual assets don't need a page-level policy. The inline
         # <script> blocks were already extracted to assets/bootstrap.js so
         # script-src 'self' holds.
+        connect_src = "connect-src 'self'; "
+        if candidate.name == "liva.html":
+            # Liva chiama soltanto l'endpoint OpenAI-compatibile scelto dall'utente;
+            # anche HTTP consente i server di modelli nella rete locale del telefono.
+            connect_src = "connect-src 'self' https: http:; "
         if candidate.name in _SHELL_DOCUMENTS:
             extra_headers.append((
                 "Content-Security-Policy",
                 "default-src 'self'; script-src 'self'; "
                 "style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; "
-                "font-src 'self'; "
+                "font-src 'self'; " +
                 # Solo 'self': in CSP3 ``'self'`` copre anche ws:/wss: verso lo
                 # stesso host:porta (misurato in Chromium 152: la WS dello
                 # stesso host si apre, un'altra porta di 127.0.0.1 e
                 # ``localhost`` sono bloccate). La shell apre solo quella
                 # (``ws-manager.js::_makeUrl`` usa ``location.host``); i vecchi
                 # ``ws: wss:`` aprivano un canale verso qualunque host.
-                "connect-src 'self'; "
+                connect_src +
                 # La vista esterna di una Jenny App e' servita dal proxy su
                 # loopback (``apps/proxy.py``) su una porta EFFIMERA, quindi e'
                 # un'altra origine e non e' 'self'. Senza questa direttiva

@@ -1009,7 +1009,7 @@ async def project_greet(ctx: CommandContext, params: Mapping[str, Any]) -> dict[
         defaults = load_config().agents.defaults
         language, bot_name = defaults.language, defaults.bot_name
     except Exception:
-        language, bot_name = "en", "Jenny"
+        language, bot_name = "en", "Liva"
     # La lingua dell'interfaccia, se il client la dice: e' quella in cui
     # l'utente sta leggendo adesso.
     lang = params.get("lang")

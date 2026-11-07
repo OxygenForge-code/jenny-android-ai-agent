@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="theme-color" content="#f7f5f2">
+  <title>Liva — Sana yakın bir sohbet</title>
+  <link rel="icon" href="/html-mobile/assets/liva/liva-mark.svg" type="image/svg+xml">
+  <link href="/html-mobile/assets/vendor/fonts/google-fonts.css" rel="stylesheet">
+  <link href="/html-mobile/assets/vendor/fonts/theme-fonts.css" rel="stylesheet">
+  <link rel="stylesheet" href="/html-mobile/assets/vendor/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+  <link rel="stylesheet" href="/html-mobile/assets/liva/liva.css">
+</head>
+<body>
+  <div class="ambient ambient-one" aria-hidden="true"></div>
+  <div class="ambient ambient-two" aria-hidden="true"></div>
+
+  <div class="app-shell" id="app">
+    <aside class="side-rail" aria-label="Ana menü">
+      <button class="brand-mark" data-action="go-chat" aria-label="Liva ana sayfa">
+        <svg viewBox="0 0 42 42" aria-hidden="true">
+          <path d="M21 5C24 13 29 18 37 21C29 24 24 29 21 37C18 29 13 24 5 21C13 18 18 13 21 5Z" fill="currentColor"/>
+          <circle cx="21" cy="21" r="4.2" fill="#fff8f3"/>
+        </svg>
+      </button>
+      <span class="brand-word">liva</span>
+      <nav class="rail-nav">
+        <button class="rail-item is-active" data-view="chat" aria-label="Sohbet" aria-current="page">
+          <i class="ti ti-message-circle-2" aria-hidden="true"></i><span>Sohbet</span><b class="nav-presence" aria-hidden="true"></b>
+        </button>
+        <button class="rail-item" data-view="memories" aria-label="Anılar">
+          <i class="ti ti-heart-handshake" aria-hidden="true"></i><span>Anılar</span>
+        </button>
+        <button class="rail-item" data-view="plans" aria-label="Planlar">
+          <i class="ti ti-calendar-heart" aria-hidden="true"></i><span>Planlar</span>
+        </button>
+      </nav>
+      <div class="rail-bottom">
+        <button class="rail-item" data-action="open-character" aria-label="Liva ile etkileşim">
+          <i class="ti ti-sparkles" aria-hidden="true"></i><span>Liva</span>
+        </button>
+        <button class="rail-item" data-action="open-settings" aria-label="Ayarlar">
+          <i class="ti ti-settings-2" aria-hidden="true"></i><span>Ayarlar</span>
+        </button>
+        <button class="mini-user" data-action="open-profile" aria-label="Profilin">s</button>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <section class="app-view chat-view is-active" id="view-chat" aria-label="Liva ile sohbet">
+        <header class="chat-header">
+          <button class="identity-button" data-action="open-character" aria-label="Liva'nın karakter alanını aç">
+            <span class="header-avatar" id="header-character"></span>
+            <span class="identity-copy">
+              <span class="identity-name"><span data-liva-name>Liva</span><span class="ai-tag">AI</span></span>
+              <span class="presence-text"><span class="online-dot"></span><span id="presence-label">şu an burada</span></span>
+            </span>
+          </button>
+          <div class="header-actions">
+            <button class="icon-button" data-action="search-chat" aria-label="Sohbette ara"><i class="ti ti-search" aria-hidden="true"></i></button>
+            <button class="icon-button voice-trigger" data-action="open-voice" aria-label="Sesli sohbeti başlat"><i class="ti ti-phone" aria-hidden="true"></i></button>
+            <button class="icon-button" data-action="open-settings" aria-label="Sohbet ayarları"><i class="ti ti-dots" aria-hidden="true"></i></button>
+          </div>
+        </header>
+
+        <div class="chat-search" id="chat-search" hidden>
+          <i class="ti ti-search" aria-hidden="true"></i>
+          <input id="chat-search-input" type="search" placeholder="Sohbette bir şey ara…" aria-label="Sohbette ara">
+          <span id="search-count"></span>
+          <button class="icon-button" data-action="close-search" aria-label="Aramayı kapat"><i class="ti ti-x"></i></button>
+        </div>
+
+        <div class="conversation" id="conversation">
+          <div class="date-divider"><span>Bugün</span></div>
+          <div class="messages" id="messages" aria-live="polite"></div>
+          <div class="typing-row" id="typing-row" hidden>
+            <div class="message-avatar tiny-character" id="typing-character"></div>
+            <div class="typing-bubble"><span></span><span></span><span></span></div>
+            <span class="typing-label">yazıyor…</span>
+          </div>
+        </div>
+
+        <button class="scroll-latest" id="scroll-latest" data-action="scroll-latest" aria-label="En son mesaja git" hidden>
+          <i class="ti ti-arrow-down"></i>
+        </button>
+
+        <div class="composer-zone">
+          <div class="quick-prompts" id="quick-prompts" aria-label="Hızlı cevaplar">
+            <button data-prompt="Bugün biraz yorgunum, benimle konuşur musun?">Biraz yorgunum <span>☁️</span></button>
+            <button data-prompt="Bana günümü güzelleştirecek bir şey anlatır mısın?">Beni gülümset <span>✨</span></button>
+            <button data-prompt="Bu akşam için bize küçük bir plan yapar mısın?">Bir plan yapalım <span>🌙</span></button>
+          </div>
+          <div class="attachment-preview" id="attachment-preview" hidden></div>
+          <div class="composer-wrap">
+            <div class="attach-menu popover" id="attach-menu" hidden>
+              <button data-action="attach-photo"><span class="menu-icon peach"><i class="ti ti-photo-plus"></i></span><span><b>Fotoğraf paylaş</b><small>Bugünden bir kare bırak</small></span></button>
+              <button data-action="add-memory"><span class="menu-icon lilac"><i class="ti ti-bookmark-plus"></i></span><span><b>Bir anı bırak</b><small>Unutmak istemediğin bir şey</small></span></button>
+              <button data-action="share-mood"><span class="menu-icon mint"><i class="ti ti-mood-smile"></i></span><span><b>Hissini paylaş</b><small>Söze nereden başlayacağını bilmediğinde</small></span></button>
+            </div>
+            <div class="emoji-menu popover" id="emoji-menu" hidden>
+              <div class="emoji-grid" id="emoji-grid"></div>
+            </div>
+            <div class="composer">
+              <button class="composer-action" data-action="toggle-attach" aria-label="Ekleri aç" aria-expanded="false"><i class="ti ti-plus"></i></button>
+              <textarea id="message-input" rows="1" maxlength="2000" enterkeyhint="send" placeholder="Liva'ya bir şey anlat…" aria-label="Mesajın"></textarea>
+              <button class="composer-action emoji-button" data-action="toggle-emoji" aria-label="Emoji ekle" aria-expanded="false"><i class="ti ti-mood-smile"></i></button>
+              <button class="send-button" id="send-button" data-action="send" aria-label="Mesajı gönder"><i class="ti ti-arrow-up"></i></button>
+            </div>
+            <div class="composer-footnote"><span>Liva bazen şaşırtıcı derecede iyi dinler.</span><span id="character-count" hidden>0 / 2000</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="app-view collection-view" id="view-memories" aria-label="Anılar" hidden>
+        <header class="collection-header">
+          <div><span class="eyebrow">BİZİM KÜÇÜK ARŞİVİMİZ</span><h1>Küçük şeyler,<br><em>güzel anılar.</em></h1><p>Bir daha gülmek isteyeceğimiz ne varsa burada.</p></div>
+          <button class="primary-button" data-action="add-memory"><i class="ti ti-plus"></i> Yeni anı</button>
+        </header>
+        <div class="memory-filter" role="tablist" aria-label="Anı filtreleri">
+          <button class="is-active" data-memory-filter="all">Tümü</button><button data-memory-filter="note">Notlar</button><button data-memory-filter="photo">Fotoğraflar</button><button data-memory-filter="moment">Küçük anlar</button>
+        </div>
+        <div class="memory-grid" id="memory-grid"></div>
+      </section>
+
+      <section class="app-view collection-view" id="view-plans" aria-label="Planlar" hidden>
+        <header class="collection-header">
+          <div><span class="eyebrow">BİRLİKTE VAKİT GEÇİRMEK İÇİN</span><h1>Sıradaki güzel şey,<br><em>ne olsun?</em></h1><p>Büyük planlara gerek yok. Biraz vakit, biraz merak yeter.</p></div>
+          <button class="primary-button" data-action="add-plan"><i class="ti ti-plus"></i> Plan ekle</button>
+        </header>
+        <div class="plan-highlight" id="plan-highlight"></div>
+        <div class="section-title"><h2>Yaklaşanlar</h2><span id="plan-count"></span></div>
+        <div class="plan-list" id="plan-list"></div>
+        <div class="plan-inspiration">
+          <div><span class="eyebrow">LIVA'NIN FİKRİ</span><h3>Bir şarkı seç, bir şarkı da ben seçeyim.</h3><p>Sonra birbirimize hangi anıyı hatırlattığını anlatalım.</p></div>
+          <button class="soft-button" data-action="try-plan-idea">Bunu planlayalım <i class="ti ti-arrow-up-right"></i></button>
+        </div>
+      </section>
+    </main>
+
+    <aside class="profile-panel" id="profile-panel" aria-label="Liva'nın karakteri ve detayları">
+      <div class="profile-topline"><span>SOHBET ARKADAŞIN</span><button class="icon-button" data-action="close-character" aria-label="Karakter alanını kapat"><i class="ti ti-x"></i></button><button class="icon-button profile-settings" data-action="open-settings" aria-label="Liva'yı kişiselleştir"><i class="ti ti-adjustments-horizontal"></i></button></div>
+      <div class="character-stage">
+        <div class="stage-label"><span class="online-dot"></span><span id="stage-mood-label">huzurlu &amp; meraklı</span></div>
+        <div id="main-character"></div>
+      </div>
+      <div class="profile-identity">
+        <div><h2 data-liva-name>Liva</h2><span class="profile-ai-badge"><i class="ti ti-sparkles"></i> yapay zekâ arkadaşın</span></div>
+        <button class="round-arrow" data-action="open-voice" aria-label="Liva ile sesli konuş"><i class="ti ti-microphone"></i></button>
+      </div>
+      <p class="profile-bio">Seni dinleyen, küçük şeyleri hatırlayan ve bazen tam da ihtiyacın olan şarkıyı öneren biri.</p>
+      <div class="interest-list" aria-label="Liva'nın ilgi alanları"><span>lo-fi geceleri</span><span>iyi kahve</span><span>uzun hikâyeler</span></div>
+      <div class="profile-divider"></div>
+      <div class="memory-title"><h3>Seni dinlerken aklımda kalanlar</h3><button data-action="edit-memories" aria-label="Hatırlananları düzenle"><i class="ti ti-pencil"></i></button></div>
+      <div class="known-details" id="known-details">
+        <button data-memory-text="Kahveni sade içmeyi seviyorsun"><i class="ti ti-coffee"></i><span>Kahven sade</span><i class="ti ti-check"></i></button>
+        <button data-memory-text="Gece saatlerinde daha çok sohbet etmeyi seviyorsun"><i class="ti ti-moon-stars"></i><span>Gece insanısın</span><i class="ti ti-check"></i></button>
+        <button data-memory-text="Lo-fi müzik sana iyi geliyor"><i class="ti ti-headphones"></i><span>Lo-fi iyi geliyor</span><i class="ti ti-check"></i></button>
+      </div>
+      <button class="next-plan-card" data-action="go-plans">
+        <span class="plan-date-tile"><b>Cum</b><small>20:30</small></span>
+        <span><small>SIRADAKİ KÜÇÜK PLAN</small><b>Film gecesi &amp; listemiz</b></span>
+        <i class="ti ti-chevron-right"></i>
+      </button>
+      <button class="daily-question" data-prompt="Şu an beni en çok neyin gülümseteceğini soracaktın. Cevabımı düşünüyorum… Sen bugün neye güldün?">
+        <i class="ti ti-message-question"></i><span><small>GÜNÜN SORUSU</small><b>Şu an seni en çok ne gülümsetir?</b></span><i class="ti ti-arrow-up-right"></i>
+      </button>
+    </aside>
+  </div>
+
+  <div class="sheet-backdrop" id="sheet-backdrop" hidden></div>
+  <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal-handle" aria-hidden="true"></div>
+    <header><div><span class="eyebrow" id="modal-eyebrow"></span><h2 id="modal-title"></h2></div><button class="icon-button" data-action="close-modal" aria-label="Pencereyi kapat"><i class="ti ti-x"></i></button></header>
+    <div class="modal-content" id="modal-content"></div>
+  </section>
+
+  <section class="voice-overlay" id="voice-overlay" aria-label="Liva ile sesli sohbet" hidden>
+    <button class="voice-close icon-button" data-action="close-voice" aria-label="Sesli sohbeti kapat"><i class="ti ti-x"></i></button>
+    <div class="voice-ambient" aria-hidden="true"></div>
+    <span class="eyebrow">SESLİ SOHBET</span>
+    <div class="voice-character" id="voice-character"></div>
+    <h2 data-liva-name>Liva</h2>
+    <p id="voice-status">Seninle konuşmaya hazır</p>
+    <div class="voice-wave" id="voice-wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <div class="voice-controls">
+      <button class="voice-control" data-action="voice-keyboard"><i class="ti ti-keyboard"></i><span>Yaz</span></button>
+      <button class="voice-control voice-mic" data-action="voice-listen"><i class="ti ti-microphone"></i><span>Konuş</span></button>
+      <button class="voice-control" data-action="voice-mute"><i class="ti ti-volume"></i><span>Ses açık</span></button>
+    </div>
+    <small class="voice-disclosure">Sesli yanıtlar cihazının konuşma özelliğini kullanır.</small>
+  </section>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden><i class="ti ti-check"></i><span></span></div>
+  <input type="file" id="photo-input" accept="image/*" hidden>
+
+  <script type="module" src="/html-mobile/assets/liva/liva-app.js"></script>
+</body>
+</html>

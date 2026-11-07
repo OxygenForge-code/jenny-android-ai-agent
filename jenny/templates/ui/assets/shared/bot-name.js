@@ -14,7 +14,7 @@
    ripiego del server (`settings_api`, `bot_name or "Jenny"`). E' un nome
    proprio, non una frase da tradurre. Tutti i ripieghi della WebUI leggono
    questo. */
-export const DEFAULT_BOT_NAME = 'Jenny';
+export const DEFAULT_BOT_NAME = 'Liva';
 
 let current = DEFAULT_BOT_NAME;
 const listeners = new Set();

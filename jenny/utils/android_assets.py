@@ -253,6 +253,10 @@ _UI_MANIFEST = [
     "assets/home-who.js",
     "assets/i18n/en.json",
     "assets/i18n/it.json",
+    "assets/liva/liva-app.js",
+    "assets/liva/liva-character.js",
+    "assets/liva/liva-mark.svg",
+    "assets/liva/liva.css",
     "assets/jenny-body-front-hand.webp",
     "assets/jenny-body-front-idle.webp",
     "assets/jenny-body-front-think.webp",
@@ -452,6 +456,7 @@ _UI_MANIFEST = [
     # L'officina ha il suo nome e si raggiunge di proposito; l'onboarding e' il
     # primo avvio, e ci rimandano entrambe quando non c'e' ancora un provider.
     "index.html",
+    "liva.html",
     "workshop.html",
     "onboarding.html",
 ]

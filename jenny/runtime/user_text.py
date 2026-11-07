@@ -819,7 +819,7 @@ def _language_from_config() -> str:
         return _FALLBACK_LANGUAGE
 
 
-DEFAULT_BOT_NAME = "Jenny"
+DEFAULT_BOT_NAME = "Liva"
 
 
 def current_bot_name() -> str:

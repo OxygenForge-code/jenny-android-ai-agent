@@ -30,7 +30,7 @@ def test_the_shared_name_falls_back_and_tells_who_listens() -> None:
         "import assert from 'node:assert/strict';\n"
         f"const {{ botName, DEFAULT_BOT_NAME }} = await import('{BOT_NAME_JS.as_uri()}');\n"
         """
-assert.equal(botName.get(), 'Jenny');
+assert.equal(botName.get(), 'Liva');
 const heard = [];
 const off = botName.onChange((n) => heard.push(n));
 botName.set('Nora');
@@ -39,7 +39,7 @@ botName.set('   ');
 assert.deepEqual(heard, ['Nora', DEFAULT_BOT_NAME], 'un cambio detto due volte, o uno perso');
 off();
 botName.set('Ada');
-assert.deepEqual(heard, ['Nora', 'Jenny']);
+assert.deepEqual(heard, ['Nora', 'Liva']);
 assert.equal(botName.get(), 'Ada');
 """
     )

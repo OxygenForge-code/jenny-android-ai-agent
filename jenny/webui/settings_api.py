@@ -768,7 +768,7 @@ async def save_onboarding(
     api_key = (data.get("api_key") or "").strip()
     api_base = normalize_api_base(data.get("api_base")) or ""
     model = (data.get("model") or "").strip()
-    bot_name = (data.get("bot_name") or "Jenny").strip()
+    bot_name = (data.get("bot_name") or "Liva").strip()
     bot_icon = (data.get("bot_icon") or "✿").strip()
 
     if not provider_name:

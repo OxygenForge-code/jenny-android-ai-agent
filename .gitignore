@@ -44,6 +44,7 @@ dmypy.json
 .hypothesis/
 
 # Build & packaging
+/node_modules/
 # Anchored to the repo root on purpose: unanchored `dist/` and `build/` also match
 # jenny/templates/ui/assets/vendor/<pkg>/dist|build, which silently excluded the
 # vendored KaTeX, Mermaid, highlight.js and Tabler icon-font assets that index.html

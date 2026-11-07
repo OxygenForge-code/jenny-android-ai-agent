@@ -149,7 +149,7 @@ def test_every_reread_alias_is_really_reread_from_disk(alias: str, tmp_path, mon
     monkeypatch.setattr(get_runtime_context(), "config_path", path)
     config = _baseline()
     save_config(config, path)
-    assert current_bot_name() == "Jenny"
+    assert current_bot_name() == "Liva"
 
     changed, restart_required = _apply_agent_settings(config, {alias: ["Ada"]})
     assert changed and not restart_required

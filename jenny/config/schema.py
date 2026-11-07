@@ -393,7 +393,7 @@ class AgentDefaults(Base):
     # Stringa vuota = auto: timezone del dispositivo su Android, altrimenti
     # UTC. Risolta una volta per load in ``loader._resolve_default_timezone``.
     timezone: str = ""
-    bot_name: str = "Jenny"
+    bot_name: str = "Liva"
     bot_icon: str = "✿"
     language: str = "it"
     tool_choice: Literal["auto", "any", "none", "required"] = Field(
