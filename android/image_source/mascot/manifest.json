@@ -1,0 +1,78 @@
+{
+  "canvas": 3000,
+  "export": {
+    "size": 768,
+    "quality": 82
+  },
+  "head": {
+    "cx": 1500,
+    "cy": 1054,
+    "rx": 424,
+    "ry": 400
+  },
+  "layers": [
+    "body_front_idle",
+    "body_front_hand",
+    "body_front_think",
+    "face_front_normal",
+    "face_front_normal_talk",
+    "face_front_thinking",
+    "face_front_happy",
+    "face_front_sad",
+    "face_front_angry",
+    "body_side_idle",
+    "face_side_happy",
+    "face_side_sad",
+    "face_side_angry"
+  ],
+  "reserve": [
+    "face_front_happy_talk",
+    "face_front_sad_talk",
+    "face_front_angry_talk",
+    "face_side_happy_talk",
+    "face_side_sad_talk",
+    "face_side_angry_talk",
+    "face_side_thinking",
+    "body_side_hand",
+    "body_front_wave1",
+    "body_front_wave2"
+  ],
+  "baked": [
+    "jenny-side",
+    "jenny-side-talk",
+    "jenny-hang",
+    "jenny-fall",
+    "jenny-ground",
+    "jenny-walk1",
+    "jenny-walk2",
+    "hello1",
+    "hello2",
+    "idle",
+    "talk_1a",
+    "talk_1b",
+    "think"
+  ],
+  "reference": [
+    "talk_1a",
+    "talk_1b",
+    "think"
+  ],
+  "faceWindows": {
+    "face_front_": [
+      1068,
+      464,
+      1932,
+      1220
+    ],
+    "face_side_": [
+      1068,
+      464,
+      1932,
+      1220
+    ]
+  },
+  "pivot": {
+    "x": 0.5849,
+    "y": 0.3049
+  }
+}
