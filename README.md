@@ -1,3 +1,10 @@
+> **Unofficial fork.** This repository is a personal fork of
+> [flagdizero/jenny-android-ai-agent](https://github.com/flagdizero/jenny-android-ai-agent),
+> maintained by [`@OxygenForge-code`](https://github.com/OxygenForge-code). It is not the
+> official Jenny, and it is not affiliated with or endorsed by the upstream project. The
+> code is AGPL-3.0; [MODIFICATIONS.md](MODIFICATIONS.md) lists what this fork changes,
+> how the APKs are built, and the trademark terms that apply if you redistribute them.
+
 <div align="center">
 
 <img src="docs/img/banner.png" alt="Jenny — a local-first personal AI agent that lives on your Android phone" width="820">
